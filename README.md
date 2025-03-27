@@ -47,27 +47,33 @@ BugSweeper es una herramienta de línea de comandos escrita en Python, diseñada
 Ejecuta el programa desde la terminal con los siguientes comandos:
 
 - **Escaneo de vulnerabilidades**:
+  Escanea una URL en busca de vulnerabilidades comunes:
   ```bash
-  bugSweeper scan --url https://example.com
+  python -m bugSweeper.main scan --url https://example.com
+  ```
+  Realiza un escaneo recursivo en múltiples URLs:
+  ```bash
+  python -m bugSweeper.main scan --recursive --urls https://example1.com https://example2.com
   ```
 
 - **Enumeración de subdominios**:
   ```bash
-  bugSweeper enum --subdomains --domain example.com
+  python -m bugSweeper.main enum --subdomains --domain example.com
   ```
 
   - **Enumeración de directorios**:
+  Los subdominios encontrados se guardarán automáticamente en un archivo subdomains.txt.
   ```bash
-  bugSweeper enum --directories --url https://example.com
+  python -m bugSweeper.main enum --directories --url https://example.com
   ```
 
 - **Generación de reportes**:
-Formato JSON
+  Formato JSON
   ```bash
-  bugSweeper report --output report.json
+  python -m bugSweeper.main report --output report.json
   ```
-Formato Markdown
-  ```markdown
+  Formato Markdown
+  ```bash
   bugSweeper report --output report.md
   ```
 
@@ -75,12 +81,13 @@ Formato Markdown
 
 ```
 BugSweeper/
-├── bugsweeper/
+├── bugSweeper/
 │   ├── __init__.py       # Archivo de inicialización del paquete
 │   ├── main.py           # Punto de entrada del programa
 │   ├── scanner.py        # Lógica para escaneo de vulnerabilidades
 │   ├── enumerator.py     # Lógica para enumeración de recursos
-│   └── reporter.py       # Lógica para generación de reportes
+│   ├── reporter.py       # Lógica para generación de reportes
+│   └── ui.py             # Interfaz gráfica minimalista para la terminal
 ├── README.md             # Documentación del proyecto
 ├── requirements.txt      # Dependencias del proyecto
 └── setup.py              # Configuración para instalar el programa
@@ -99,3 +106,7 @@ Las contribuciones son bienvenidas. Si tienes ideas para mejorar la herramienta 
 ## Licencia
 
 Este proyecto está licenciado bajo la MIT License.
+
+## Autor
+
+Marc Santacana
