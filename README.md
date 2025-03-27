@@ -68,6 +68,7 @@ Ejecuta el programa desde la terminal con los siguientes comandos:
   ```
 
 - **Generación de reportes**:
+  
   Formato JSON
   ```bash
   python -m bugSweeper.main report --output report.json
@@ -78,7 +79,6 @@ Ejecuta el programa desde la terminal con los siguientes comandos:
   ```
 
 ## Estructura del Proyecto
-
 ```
 BugSweeper/
 ├── bugSweeper/
