@@ -1,4 +1,4 @@
-# bugSweeper
+# BugSweeper
 
 BugSweeper es una herramienta de línea de comandos escrita en Python, diseñada para ayudar a los investigadores de seguridad en la simulación y detección de vulnerabilidades en aplicaciones y sistemas. Está orientada a la práctica del Bug Bounty, proporcionando funcionalidades útiles para identificar y reportar problemas de seguridad.
 
@@ -6,11 +6,13 @@ BugSweeper es una herramienta de línea de comandos escrita en Python, diseñada
 
 - **Escaneo de Vulnerabilidades**:
   - Analiza aplicaciones en busca de vulnerabilidades comunes como SQL Injection, XSS, CSRF, entre otras.
-  - Genera reportes detallados con información sobre las vulnerabilidades encontradas.
+  - Realiza análisis de cabeceras HTTP para identificar configuraciones inseguras.
+  - Soporte para escaneo recursivo en múltiples URLs.
 
 - **Enumeración de Recursos**:
   - Permite enumerar directorios, subdominios y endpoints de una aplicación web.
   - Incluye soporte para diccionarios personalizados.
+  - Guarda los subdominios encontrados en un archivo `.txt`.
 
 - **Pruebas de Seguridad Automatizadas**:
   - Realiza pruebas básicas de seguridad como detección de cabeceras HTTP inseguras o configuraciones incorrectas.
@@ -68,17 +70,18 @@ Ejecuta el programa desde la terminal con los siguientes comandos:
   ```
 
 - **Generación de reportes**:
-  
+
   Formato JSON
   ```bash
   python -m bugSweeper.main report --output report.json
   ```
   Formato Markdown
   ```bash
-  bugSweeper report --output report.md
+  python -m bugSweeper.main report --output report.md
   ```
 
 ## Estructura del Proyecto
+
 ```
 BugSweeper/
 ├── bugSweeper/
