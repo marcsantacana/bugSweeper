@@ -1,9 +1,7 @@
 import argparse
-from .scanner import scan_vulnerabilities
-from .enumerator import enumerate_subdomains, enumerate_directories
-from .enumerator import save_subdomains_to_file  # Importamos la nueva función
+from .scanner import scan_vulnerabilities, analyze_http_headers, recursive_scan
+from .enumerator import enumerate_subdomains, enumerate_directories, save_subdomains_to_file
 from .reporter import generate_report
-from .ui import show_menu, show_scan_progress, show_results
 from rich.console import Console
 
 console = Console()
@@ -15,6 +13,8 @@ def main():
     # Comando para escanear vulnerabilidades
     scan_parser = subparsers.add_parser("scan")
     scan_parser.add_argument("--url", required=True, help="URL a escanear")
+    scan_parser.add_argument("--recursive", action="store_true", help="Habilitar escaneo recursivo")
+    scan_parser.add_argument("--urls", nargs="+", help="Lista de URLs para escaneo recursivo")
 
     # Comando para enumerar recursos
     enum_parser = subparsers.add_parser("enum")
@@ -31,10 +31,14 @@ def main():
 
     if args.command == "scan":
         console.print("[bold cyan]Iniciando escaneo de vulnerabilidades...[/bold cyan]")
-        urls = [args.url]
-        show_scan_progress(urls)
-        results = scan_vulnerabilities(args.url)
-        show_results(results)
+        if args.recursive and args.urls:
+            results = recursive_scan(args.urls)
+            console.print(f"Resultados del escaneo recursivo: {results}")
+        else:
+            results = scan_vulnerabilities(args.url)
+            headers_issues = analyze_http_headers(args.url)
+            console.print(f"Resultados del escaneo: {results}")
+            console.print(f"Problemas de cabeceras HTTP: {headers_issues}")
 
     elif args.command == "enum":
         if args.subdomains and args.domain:
@@ -53,7 +57,7 @@ def main():
         console.print(f"Reporte generado en: {args.output}")
 
     else:
-        show_menu()
+        console.print("[bold red]Comando no reconocido. Usa --help para más información.[/bold red]")
 
 if __name__ == "__main__":
     main()

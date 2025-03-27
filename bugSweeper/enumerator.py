@@ -1,5 +1,3 @@
-import requests
-
 def enumerate_subdomains(domain, wordlist):
     """Enumera subdominios de un dominio dado."""
     subdomains = []
