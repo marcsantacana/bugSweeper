@@ -63,7 +63,8 @@ Ejecuta el programa desde la terminal con los siguientes comandos:
   python -m bugSweeper.main enum --subdomains --domain example.com
   ```
 
-  - **Enumeración de directorios**:
+- **Enumeración de directorios**:
+    
   Los subdominios encontrados se guardarán automáticamente en un archivo subdomains.txt.
   ```bash
   python -m bugSweeper.main enum --directories --url https://example.com
