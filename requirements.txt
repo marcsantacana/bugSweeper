@@ -1,0 +1,9 @@
+# Dependencias principales
+requests>=2.25.1
+validators>=0.20.0
+rich>=13.3.2
+
+# Dependencias opcionales para futuras funcionalidades
+# beautifulsoup4>=4.9.3  # Para análisis de HTML si se necesita
+# lxml>=4.6.3           # Para procesamiento avanzado de XML/HTML
+# colorama>=0.4.4       # Para salida de texto con colores en la terminal

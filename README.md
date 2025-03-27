@@ -48,22 +48,27 @@ Ejecuta el programa desde la terminal con los siguientes comandos:
 
 - **Escaneo de vulnerabilidades**:
   ```bash
-  python -m bugsweeper.main scan --url https://example.com
+  bugSweeper scan --url https://example.com
   ```
 
 - **Enumeración de subdominios**:
   ```bash
-  python -m bugsweeper.main enum --subdomains --domain example.com
+  bugSweeper enum --subdomains --domain example.com
+  ```
+
+  - **Enumeración de directorios**:
+  ```bash
+  bugSweeper enum --directories --url https://example.com
   ```
 
 - **Generación de reportes**:
+Formato JSON
   ```bash
-  python -m bugsweeper.main report --output report.md
+  bugSweeper report --output report.json
   ```
-
-- **Modo educativo**:
-  ```bash
-  python -m bugsweeper.main learn
+Formato Markdown
+  ```markdown
+  bugSweeper report --output report.md
   ```
 
 ## Estructura del Proyecto
@@ -75,8 +80,7 @@ BugSweeper/
 │   ├── main.py           # Punto de entrada del programa
 │   ├── scanner.py        # Lógica para escaneo de vulnerabilidades
 │   ├── enumerator.py     # Lógica para enumeración de recursos
-│   ├── reporter.py       # Lógica para generación de reportes
-│   └── educational.py    # Modo educativo
+│   └── reporter.py       # Lógica para generación de reportes
 ├── README.md             # Documentación del proyecto
 ├── requirements.txt      # Dependencias del proyecto
 └── setup.py              # Configuración para instalar el programa

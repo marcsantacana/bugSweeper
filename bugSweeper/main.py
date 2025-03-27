@@ -2,6 +2,10 @@ import argparse
 from .scanner import scan_vulnerabilities
 from .enumerator import enumerate_subdomains, enumerate_directories
 from .reporter import generate_report
+from .ui import show_menu, show_scan_progress, show_results
+from rich.console import Console
+
+console = Console()
 
 def main():
     parser = argparse.ArgumentParser(description="BugSweeper CLI")
@@ -25,16 +29,26 @@ def main():
     args = parser.parse_args()
 
     if args.command == "scan":
-        scan_vulnerabilities(args.url)
+        console.print("[bold cyan]Iniciando escaneo de vulnerabilidades...[/bold cyan]")
+        urls = [args.url]
+        show_scan_progress(urls)
+        results = scan_vulnerabilities(args.url)
+        show_results(results)
     elif args.command == "enum":
         if args.subdomains and args.domain:
-            print(enumerate_subdomains(args.domain, ["www", "api", "test"]))
+            console.print("[bold cyan]Enumerando subdominios...[/bold cyan]")
+            subdomains = enumerate_subdomains(args.domain, ["www", "api", "test"])
+            console.print(f"Subdominios encontrados: {subdomains}")
         if args.directories and args.url:
-            print(enumerate_directories(args.url, ["admin", "login", "dashboard"]))
+            console.print("[bold cyan]Enumerando directorios...[/bold cyan]")
+            directories = enumerate_directories(args.url, ["admin", "login", "dashboard"])
+            console.print(f"Directorios encontrados: {directories}")
     elif args.command == "report":
+        console.print("[bold cyan]Generando reporte...[/bold cyan]")
         generate_report(args.output)
+        console.print(f"Reporte generado en: {args.output}")
     else:
-        parser.print_help()
+        show_menu()
 
 if __name__ == "__main__":
     main()
