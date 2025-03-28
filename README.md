@@ -1,4 +1,4 @@
-# BugSweeper v.01.00
+# bugSweeper v.01.00
 
 BugSweeper es una herramienta de línea de comandos escrita en Python, diseñada para ayudar a los investigadores de seguridad en la simulación y detección de vulnerabilidades en aplicaciones y sistemas. Está orientada a la práctica del Bug Bounty, proporcionando funcionalidades útiles para identificar y reportar problemas de seguridad.
 
