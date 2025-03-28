@@ -102,57 +102,54 @@ Ejecuta el programa desde la terminal con los siguientes comandos:
   [!] Misconfiguration detected: http://example.com/.env is accessible.
   ```
 
-### Generación de reportes
+  ### Generación de reportes
 
-### Generación de Reportes
+    - **Ejemplo de Resumen en la Terminal y Reporte Detallado**
 
-#### Ejemplo de Resumen en la Terminal y Reporte Detallado
+      ```python
+      from reporter import generate_report
 
-```python
-from reporter import generate_report
+      data = {
+          "Subdomains": "3 subdominios encontrados:\n- http://www.example.com\n- http://mail.example.com\n- http://ftp.example.com",
+          "Directories": "2 directorios accesibles:\n- http://example.com/admin\n- http://example.com/login",
+          "Broken Authentication": "1 vulnerabilidad detectada:\n- Credenciales admin:admin funcionan en http://example.com/login",
+          "Misconfigurations": "Archivo .env accesible:\n- http://example.com/.env"
+      }
+      generate_report("detailed_report.md", data)
+      ```
 
-data = {
-    "Subdomains": "3 subdominios encontrados:\n- http://www.example.com\n- http://mail.example.com\n- http://ftp.example.com",
-    "Directories": "2 directorios accesibles:\n- http://example.com/admin\n- http://example.com/login",
-    "Broken Authentication": "1 vulnerabilidad detectada:\n- Credenciales admin:admin funcionan en http://example.com/login",
-    "Misconfigurations": "Archivo .env accesible:\n- http://example.com/.env"
-}
+  - **Salida en la Terminal**:
+    ```plaintext
+    === Resumen del Reporte ===
+    - Subdomains: 3 subdominios encontrados:
+    - Directories: 2 directorios accesibles:
+    - Broken Authentication: 1 vulnerabilidad detectada:
+    - Misconfigurations: Archivo .env accesible:
+    ====================================================
+    ```
 
-generate_report("detailed_report.md", data)
-```
+  - **Contenido del Archivo `detailed_report.md`**:
+    ```markdown
+    # Reporte de Vulnerabilidades
+    ## Subdomains
+    3 subdominios encontrados:
+    - http://www.example.com
+    - http://mail.example.com
+    - http://ftp.example.com
 
-#### Salida en la Terminal:
-```plaintext
-=== Resumen del Reporte ===
-- Subdomains: 3 subdominios encontrados:
-- Directories: 2 directorios accesibles:
-- Broken Authentication: 1 vulnerabilidad detectada:
-- Misconfigurations: Archivo .env accesible:
-===========================
-```
+    ## Directories
+    2 directorios accesibles:
+    - http://example.com/admin
+    - http://example.com/login
 
-#### Contenido del Archivo `detailed_report.md`:
-```markdown
-# Reporte de Vulnerabilidades
-## Subdomains
-3 subdominios encontrados:
-- http://www.example.com
-- http://mail.example.com
-- http://ftp.example.com
+    ## Broken Authentication
+    1 vulnerabilidad detectada:
+    - Credenciales admin:admin funcionan en http://example.com/login
 
-## Directories
-2 directorios accesibles:
-- http://example.com/admin
-- http://example.com/login
-
-## Broken Authentication
-1 vulnerabilidad detectada:
-- Credenciales admin:admin funcionan en http://example.com/login
-
-## Misconfigurations
-Archivo .env accesible:
-- http://example.com/.env
-```
+    ## Misconfigurations
+    Archivo .env accesible:
+    - http://example.com/.env
+    ```
 
 ## Estructura del Proyecto
 
