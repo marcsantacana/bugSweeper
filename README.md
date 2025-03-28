@@ -70,6 +70,38 @@ Ejecuta el programa desde la terminal con los siguientes comandos:
   python -m bugSweeper.main enum --directories --url https://example.com
   ```
 
+### Detección de Broken Authentication
+
+```python
+from enumerator import detect_broken_authentication
+
+url = "http://example.com"
+common_credentials = [("admin", "admin"), ("root", "toor"), ("user", "password")]
+detect_broken_authentication(url, common_credentials)
+```
+
+Si se detecta un problema, se imprimirá un mensaje como:
+
+```
+[!] Broken Authentication detected at http://example.com/login with credentials admin:admin
+```
+
+### Detección de Configuraciones Inseguras
+
+```python
+from enumerator import detect_misconfigurations
+
+url = "http://example.com"
+sensitive_files = [".env", "config.php", "backup.zip"]
+detect_misconfigurations(url, sensitive_files)
+```
+
+Si se detecta una configuración insegura, se imprimirá un mensaje como:
+
+```
+[!] Misconfiguration detected: http://example.com/.env is accessible.
+```
+
 - **Generación de reportes**:
 
   Formato JSON

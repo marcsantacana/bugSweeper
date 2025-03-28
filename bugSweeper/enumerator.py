@@ -27,3 +27,35 @@ def enumerate_directories(url, wordlist):
         except requests.ConnectionError:
             pass
     return directories
+
+def detect_broken_authentication(url, common_credentials):
+    """
+    Detecta problemas de autenticación rota probando credenciales comunes.
+    """
+    vulnerable = False
+    login_url = f"{url}/login"  # Supongamos que la página de login está en /login
+    for username, password in common_credentials:
+        try:
+            response = requests.post(login_url, data={"username": username, "password": password})
+            if response.status_code == 200 and "Welcome" in response.text:  # Ajustar según el texto esperado
+                print(f"[!] Broken Authentication detected at {login_url} with credentials {username}:{password}")
+                vulnerable = True
+        except requests.ConnectionError:
+            pass
+    return vulnerable
+
+def detect_misconfigurations(url, sensitive_files):
+    """
+    Detecta configuraciones inseguras buscando archivos sensibles.
+    """
+    misconfigurations = []
+    for file in sensitive_files:
+        file_url = f"{url}/{file}"
+        try:
+            response = requests.get(file_url)
+            if response.status_code == 200:
+                print(f"[!] Misconfiguration detected: {file_url} is accessible.")
+                misconfigurations.append(file_url)
+        except requests.ConnectionError:
+            pass
+    return misconfigurations
