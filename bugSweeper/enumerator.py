@@ -1,14 +1,18 @@
-def enumerate_subdomains(domain, wordlist):
-    """Enumera subdominios de un dominio dado."""
+import requests
+
+def enumerate_subdomains(domain, wordlist, output_file="subdomains.txt"):
+    """Enumera subdominios de un dominio dado y los guarda en un archivo."""
     subdomains = []
-    for subdomain in wordlist:
-        url = f"http://{subdomain}.{domain}"
-        try:
-            response = requests.get(url)
-            if response.status_code == 200:
-                subdomains.append(url)
-        except requests.ConnectionError:
-            pass
+    with open(output_file, "w") as file:
+        for subdomain in wordlist:
+            url = f"http://{subdomain}.{domain}"
+            try:
+                response = requests.get(url)
+                if response.status_code == 200:
+                    subdomains.append(url)
+                    file.write(url + "\n")  # Escribe el subdominio en el archivo
+            except requests.ConnectionError:
+                pass
     return subdomains
 
 def enumerate_directories(url, wordlist):

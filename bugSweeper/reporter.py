@@ -12,3 +12,4 @@ def generate_report(output_file, data=None):
                 f.write(f"## {key}\n{value}\n")
     else:
         raise ValueError("Formato de archivo no soportado. Use .json o .md")
+    
